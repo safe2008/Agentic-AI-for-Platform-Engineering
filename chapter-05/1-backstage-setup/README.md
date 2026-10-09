@@ -116,7 +116,7 @@ integrations:
 
 ## Part 3: Configure ArgoCD
 
-ArgoCD was already installed on your cluster by [`00-cluster-setup/setup-cluster.sh`](../../00-cluster-setup/README.md) (release `v3.0.21`, in the `argocd` namespace). This part wires it up to your GitHub repository.
+ArgoCD was already installed on your cluster by [`00-cluster-setup/setup-cluster.sh`](../../00-cluster-setup/README.md) (release `v3.5.4`, in the `argocd` namespace). This part wires it up to your GitHub repository.
 
 > **Note:** If you're using Amazon EKS, you can use the managed [ArgoCD capability](https://docs.aws.amazon.com/eks/latest/userguide/capabilities.html) instead of the manual install.
 

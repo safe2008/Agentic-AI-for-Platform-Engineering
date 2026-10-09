@@ -9,7 +9,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/YOUR_USERNAME/backstage-components
+    repoURL: https://github.com/safe2008/backstage-components
     targetRevision: HEAD
     path: langfuse/k8s
   destination:

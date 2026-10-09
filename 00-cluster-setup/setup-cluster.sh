@@ -15,7 +15,7 @@
 set -euo pipefail
 
 CLUSTER_NAME="${CLUSTER_NAME:-agentic-platform}"
-ARGOCD_VERSION="${ARGOCD_VERSION:-v3.0.21}"
+ARGOCD_VERSION="${ARGOCD_VERSION:-v3.5.4}"
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
 info() { printf '\033[1;34m==>\033[0m %s\n' "$1"; }
@@ -63,7 +63,9 @@ else
   else
     info "Installing ArgoCD ${ARGOCD_VERSION}"
     kubectl create namespace argocd
-    kubectl apply -n argocd -f "https://raw.githubusercontent.com/argoproj/argo-cd/${ARGOCD_VERSION}/manifests/install.yaml"
+    # Server-side apply: the ApplicationSet CRD exceeds the 256 KiB
+    # last-applied-configuration annotation that client-side apply writes.
+    kubectl apply --server-side --force-conflicts -n argocd -f "https://raw.githubusercontent.com/argoproj/argo-cd/${ARGOCD_VERSION}/manifests/install.yaml"
   fi
   info "Waiting for ArgoCD server to be ready"
   kubectl wait --for=condition=available --timeout=300s deployment/argocd-server -n argocd
