@@ -150,7 +150,13 @@ Lab READMEs: [`chapter-05/`](./chapter-05/README.md)
   ```
   Replace the `resolutions` block in `package.json` with `chapter-05/1-backstage-setup/files/package-resolutions.json`, then run `yarn install`. Put the GitHub integration token in `app-config.local.yaml` as `${GITHUB_RW_TOKEN}`.
 - **Verify:** `NODE_OPTIONS=--no-node-snapshot yarn start` serves `http://localhost:3000`.
-- **Status:** 🟡 The app is scaffolded with create-app 0.7.9, `yarn install` has run, and `app-config.local.yaml` reads the token from `${GITHUB_RW_TOKEN}`. `yarn start` serves `http://localhost:3000`, but the running backend was started without `GITHUB_RW_TOKEN`, so the GitHub integration has no token. Restart it with the token exported once 5.2 is done. The `webapp-template` files are in `examples/` but not yet registered in `app-config.yaml` (step 5.4).
+- **Status:** 🟡 Verify passes: `localhost:3000` returns 200, and the backend on `localhost:7007` is up. Confirmed:
+  - `@backstage/create-app` is pinned to 0.7.9.
+  - The `resolutions` block matches `package-resolutions.json`.
+  - `yarn install` has run.
+  - `app-config.local.yaml` reads the token from `${GITHUB_RW_TOKEN}`.
+
+  Still open: confirm `GITHUB_RW_TOKEN` was exported in the terminal that ran `yarn start` (5.2). The backend's environment can't be inspected from outside, so restart it with the token exported if unsure. The `webapp-template` files are in `examples/` but not yet registered in `app-config.yaml` (step 5.4).
 
 ### 5.4 Web-app template and the first app (Lab 1, Parts 4–5)
 
