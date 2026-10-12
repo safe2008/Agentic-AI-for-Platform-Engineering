@@ -6,12 +6,12 @@ Every chapter in this book runs against **one local Kubernetes cluster** you cre
 
 ## What this gives you
 
-| Component | Why |
-|---|---|
-| **kind cluster** `agentic-platform` | The substrate everything deploys onto |
-| **Metrics Server** | Required by the HPA in the Chapter 5 web-app template |
-| **ArgoCD** (`v3.0.21`) | The GitOps deploy channel used in Chapters 5 and 7 |
-| **NodePorts** 30080/30443/30900/30901 | Forwarded to `localhost` for the chapter demos |
+| Component                                   | Why                                                   |
+| ------------------------------------------- | ----------------------------------------------------- |
+| **kind cluster** `agentic-platform` | The substrate everything deploys onto                 |
+| **Metrics Server**                    | Required by the HPA in the Chapter 5 web-app template |
+| **ArgoCD** (`v3.5.4`)               | The GitOps deploy channel used in Chapters 5 and 7    |
+| **NodePorts** 30080/30443/30900/30901 | Forwarded to`localhost` for the chapter demos       |
 
 ## Prerequisites
 
@@ -83,9 +83,9 @@ Deletes the kind cluster and everything in it. Your Backstage app on the host an
 
 ## Files
 
-| File | Purpose |
-|---|---|
-| [`kind-config.yaml`](./kind-config.yaml) | Cluster definition + NodePort mappings |
+| File                                      | Purpose                                     |
+| ----------------------------------------- | ------------------------------------------- |
+| [`kind-config.yaml`](./kind-config.yaml) | Cluster definition + NodePort mappings      |
 | [`setup-cluster.sh`](./setup-cluster.sh) | Idempotent create + metrics-server + ArgoCD |
-| [`verify.sh`](./verify.sh) | Read-only environment checks |
-| [`teardown.sh`](./teardown.sh) | Delete the cluster |
+| [`verify.sh`](./verify.sh)               | Read-only environment checks                |
+| [`teardown.sh`](./teardown.sh)           | Delete the cluster                          |

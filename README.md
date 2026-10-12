@@ -12,6 +12,8 @@ cd 00-cluster-setup
 
 See [`00-cluster-setup/README.md`](./00-cluster-setup/README.md) for details, EKS notes, and teardown.
 
+For an end-to-end, resumable walkthrough of every lab in book order, follow [`SETUP.md`](./SETUP.md). Shared terms are defined in [`CONTEXT.md`](./CONTEXT.md).
+
 ## Layout
 
 | Path | Chapter | What it builds |
