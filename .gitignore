@@ -7,3 +7,4 @@ __pycache__/
 *.pyc
 .fastembed_cache/
 .memsearch/
+.boost/

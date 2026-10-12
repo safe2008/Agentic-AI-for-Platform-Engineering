@@ -119,6 +119,14 @@ Lab READMEs: [`chapter-05/`](./chapter-05/README.md)
   - `Repository not found`: the repo doesn't exist, or the Secret is missing.
   - `Write access to repository not granted`: the token's repository list doesn't include the repo.
   - After fixing the token, restart `argocd-repo-server` and `argocd-applicationset-controller` to clear the cached failure.
+  - `dns: A record lookup error: lookup argocd-repo-server ... i/o timeout` after a cluster or Docker restart: the ArgoCD controllers started before CoreDNS was ready and stay stuck. Restart them, wait for the repo server to be ready, then refresh the ApplicationSet:
+    ```bash
+    kubectl -n argocd rollout restart deploy/argocd-repo-server \
+      deploy/argocd-applicationset-controller statefulset/argocd-application-controller
+    kubectl -n argocd rollout status deploy/argocd-repo-server
+    kubectl -n argocd annotate applicationset backstage-app-discovery \
+      argocd.argoproj.io/application-set-refresh=true --overwrite
+    ```
 - **Status:** ✅ Done.
 
 ### 5.2 Read/write token
@@ -142,7 +150,7 @@ Lab READMEs: [`chapter-05/`](./chapter-05/README.md)
   ```
   Replace the `resolutions` block in `package.json` with `chapter-05/1-backstage-setup/files/package-resolutions.json`, then run `yarn install`. Put the GitHub integration token in `app-config.local.yaml` as `${GITHUB_RW_TOKEN}`.
 - **Verify:** `NODE_OPTIONS=--no-node-snapshot yarn start` serves `http://localhost:3000`.
-- **Status:** ⬜ To do.
+- **Status:** 🟡 The app is scaffolded with create-app 0.7.9, `yarn install` has run, and `app-config.local.yaml` reads the token from `${GITHUB_RW_TOKEN}`. `yarn start` serves `http://localhost:3000`, but the running backend was started without `GITHUB_RW_TOKEN`, so the GitHub integration has no token. Restart it with the token exported once 5.2 is done. The `webapp-template` files are in `examples/` but not yet registered in `app-config.yaml` (step 5.4).
 
 ### 5.4 Web-app template and the first app (Lab 1, Parts 4–5)
 
